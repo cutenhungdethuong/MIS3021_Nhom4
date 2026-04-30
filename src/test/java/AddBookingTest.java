@@ -1,5 +1,5 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import java.util.Locale;
 
 public class AddBookingTest extends BaseTest {
-    private static final String BOOKING_DATE = "2026-04-28";
+    private static final String BOOKING_DATE = "2026-05-28";
     private static final String SUCCESS_TEXT = "dat lich thanh cong";
     private static final String INVALID_NAME_TEXT = "ho va ten khach hang khong hop le, yeu cau nhap lai";
     private static final String INVALID_PHONE_TEXT = "so dien thoai khach hang khong hop le, yeu cau nhap lai";
@@ -34,11 +34,11 @@ public class AddBookingTest extends BaseTest {
 
         String normalizedMessage = waitForMessage(SUCCESS_TEXT);
         forceBookingPageVisible();
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(SUCCESS_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC01 should stay on booking page while success message is displayed");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"),
+                "TC01 should stay on booking page while success message is displayed");
     }
 
     @Test
@@ -48,11 +48,10 @@ public class AddBookingTest extends BaseTest {
         clickWhenReady(By.xpath("//button[contains(text(), 'Lưu')]"));
 
         String normalizedMessage = waitForMessage(INVALID_NAME_TEXT);
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(INVALID_NAME_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC02 should stay on booking page after validation error");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"), "TC02 should stay on booking page after validation error");
     }
 
     @Test
@@ -62,53 +61,49 @@ public class AddBookingTest extends BaseTest {
         clickWhenReady(By.xpath("//button[contains(text(), 'Lưu')]"));
 
         String normalizedMessage = waitForMessage(INVALID_PHONE_TEXT);
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(INVALID_PHONE_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC03 should stay on booking page after validation error");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"), "TC03 should stay on booking page after validation error");
     }
 
     @Test
     public void TC04() {
         openBookingPage();
-        populateBookingForm("Nguyễn Thị An", "026736356", "2026-04-29", "09:30", "Tắm toàn thân", TAM_TRANG);
+        populateBookingForm("Nguyễn Thị An", "026736356", "2026-05-29", "09:30", "Tắm toàn thân", TAM_TRANG);
         clickWhenReady(By.xpath("//button[contains(text(), 'Lưu')]"));
 
         String normalizedMessage = waitForMessage(INVALID_PHONE_TEXT);
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(INVALID_PHONE_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC04 should stay on booking page after validation error");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"), "TC04 should stay on booking page after validation error");
     }
 
     @Test
     public void TC05() {
         openBookingPage();
-        populateBookingForm("Nguyễn Thị An", "02673635631", "2026-04-29", "09:30", "Tắm toàn thân", TAM_TRANG);
+        populateBookingForm("Nguyễn Thị An", "02673635631", "2026-05-29", "09:30", "Tắm toàn thân", TAM_TRANG);
         clickWhenReady(By.xpath("//button[contains(text(), 'Lưu')]"));
 
         String normalizedMessage = waitForMessage(INVALID_PHONE_TEXT);
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(INVALID_PHONE_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC05 should stay on booking page after validation error");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"), "TC05 should stay on booking page after validation error");
     }
 
     @Test
     public void TC06() {
         openBookingPage();
-        populateBookingForm("Nguyễn Thị An", "03278h768!", "2026-04-29", "09:30", "Tắm toàn thân", TAM_TRANG);
+        populateBookingForm("Nguyễn Thị An", "03278h768!", "2026-05-29", "09:30", "Tắm toàn thân", TAM_TRANG);
         clickWhenReady(By.xpath("//button[contains(text(), 'Lưu')]"));
 
         String normalizedMessage = waitForMessage(INVALID_PHONE_TEXT);
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(INVALID_PHONE_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC06 should stay on booking page after validation error");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"), "TC06 should stay on booking page after validation error");
     }
 
     @Test
@@ -118,102 +113,96 @@ public class AddBookingTest extends BaseTest {
         clickWhenReady(By.xpath("//button[contains(text(), 'Lưu')]"));
 
         String normalizedMessage = waitForMessage(EMPTY_DATE_TEXT);
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(EMPTY_DATE_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC07 should stay on booking page after validation error");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"), "TC07 should stay on booking page after validation error");
     }
 
     @Test
     public void TC08() {
         openBookingPage();
-        // Today is 2026-04-17 (from metadata). 2026-02-01 is in the past.
+        // Today is 2026-05-17 (from metadata). 2026-02-01 is in the past.
         populateBookingForm("Nguyễn Thị An", "0267363563", "2026-02-01", "10:00", "gội nước nóng", GOI_DAU_DUONG_SINH);
         clickWhenReady(By.xpath("//button[contains(text(), 'Lưu')]"));
 
         String normalizedMessage = waitForMessage(PAST_DATE_TEXT);
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(PAST_DATE_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC08 should stay on booking page after validation error");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"), "TC08 should stay on booking page after validation error");
     }
 
     @Test
     public void TC09() {
         openBookingPage();
-        populateBookingForm("Nguyễn Thị An", "0267363563", "2026-04-29", "", "gội nước nóng", GOI_DAU_DUONG_SINH);
+        populateBookingForm("Nguyễn Thị An", "0267363563", "2026-05-29", "", "gội nước nóng", GOI_DAU_DUONG_SINH);
         clickWhenReady(By.xpath("//button[contains(text(), 'Lưu')]"));
 
         String normalizedMessage = waitForMessage(EMPTY_TIME_TEXT);
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(EMPTY_TIME_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC09 should stay on booking page after validation error");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"), "TC09 should stay on booking page after validation error");
     }
 
     @Test
     public void TC10() {
         openBookingPage();
         // 10:00 PM is 22:00, which is outside the 08:00 - 20:00 range.
-        populateBookingForm("Nguyễn Thị An", "0267363563", "2026-04-28", "22:00", "gội nước nóng", GOI_DAU_DUONG_SINH);
+        populateBookingForm("Nguyễn Thị An", "0267363563", "2026-05-28", "22:00", "gội nước nóng", GOI_DAU_DUONG_SINH);
         clickWhenReady(By.xpath("//button[contains(text(), 'Lưu')]"));
 
         String normalizedMessage = waitForMessage(INVALID_TIME_RANGE_TEXT);
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(INVALID_TIME_RANGE_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC10 should stay on booking page after validation error");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"), "TC10 should stay on booking page after validation error");
     }
 
     @Test
     public void TC11() {
         openBookingPage();
         // Passing empty service name to skip selection
-        populateBookingForm("Nguyễn Thị An", "0267363563", "2026-04-28", "10:00", "gội nước nóng", "");
+        populateBookingForm("Nguyễn Thị An", "0267363563", "2026-05-28", "10:00", "gội nước nóng", "");
         clickWhenReady(By.xpath("//button[contains(text(), 'Lưu')]"));
 
         String normalizedMessage = waitForMessage(EMPTY_SERVICE_TEXT);
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(EMPTY_SERVICE_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC11 should stay on booking page after validation error");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"), "TC11 should stay on booking page after validation error");
     }
 
     @Test
     public void TC12() {
         openBookingPage();
-        populateBookingForm("Nguyễn Thị An", "0267363563", "2026-04-28", "10:00", "", GOI_DAU_DUONG_SINH);
+        populateBookingForm("Nguyễn Thị An", "0267363563", "2026-05-28", "10:00", "", GOI_DAU_DUONG_SINH);
         clickWhenReady(By.xpath("//button[contains(text(), 'Lưu')]"));
 
         String normalizedMessage = waitForMessage(DUPLICATE_BOOKING_TEXT);
-        Assertions.assertTrue(
+        Assert.assertTrue(
                 normalizedMessage.contains(DUPLICATE_BOOKING_TEXT),
-                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText()
-        );
-        Assertions.assertTrue(isPageActive("booking-page"), "TC12 should stay on booking page after validation error");
+                "Unexpected modal message: " + driver.findElement(By.id("modal-message")).getText());
+        Assert.assertTrue(isPageActive("booking-page"), "TC12 should stay on booking page after validation error");
     }
 
     @Test
     public void TC13() {
         openBookingPage();
-        populateBookingForm("Nguyễn Thị An", "0267363563", "2026-04-28", "10:00", "gội nước nóng", GOI_DAU_DUONG_SINH);
-        
-        // Mở khóa điều hướng vì BaseTest chặn chuyển trang về home-page để test các chức năng khác
+        populateBookingForm("Nguyễn Thị An", "0267363563", "2026-05-28", "10:00", "gội nước nóng", GOI_DAU_DUONG_SINH);
+
+        // Mở khóa điều hướng vì BaseTest chặn chuyển trang về home-page để test các
+        // chức năng khác
         ((JavascriptExecutor) driver).executeScript(
                 "if (window.__originalUINavigate) { window.UI.navigate = window.__originalUINavigate; }" +
-                "if (window.__originalNavigate) { window.navigate = window.__originalNavigate; }"
-        );
-        
+                        "if (window.__originalNavigate) { window.navigate = window.__originalNavigate; }");
+
         clickWhenReady(By.xpath("//button[contains(text(), 'Hủy')]"));
 
         wait.until(driver -> isPageActive("home-page"));
-        Assertions.assertTrue(isPageActive("home-page"), "Hệ thống phải quay về màn hình Trang chủ sau khi bấm Hủy");
-        Assertions.assertFalse(isPageActive("booking-page"), "Giao diện thêm lịch hẹn phải được đóng");
+        Assert.assertTrue(isPageActive("home-page"), "Hệ thống phải quay về màn hình Trang chủ sau khi bấm Hủy");
+        Assert.assertFalse(isPageActive("booking-page"), "Giao diện thêm lịch hẹn phải được đóng");
     }
 
     private void openBookingPage() {
@@ -221,7 +210,8 @@ public class AddBookingTest extends BaseTest {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("bk-name")));
     }
 
-    private void populateBookingForm(String name, String phone, String date, String time, String note, String serviceName) {
+    private void populateBookingForm(String name, String phone, String date, String time, String note,
+            String serviceName) {
         ensureServiceOptionsLoaded();
 
         ((JavascriptExecutor) driver).executeScript(
@@ -239,19 +229,17 @@ public class AddBookingTest extends BaseTest {
                 phone,
                 date,
                 time,
-                note
-        );
+                note);
         if (serviceName != null && !serviceName.isEmpty()) {
             selectServiceByName(serviceName);
         } else {
             ((JavascriptExecutor) driver).executeScript(
                     "const select = document.getElementById('bk-service');" +
-                    "if (select) {" +
-                    "  select.value = '';" +
-                    "  select.selectedIndex = 0;" + // Often 0 is the default placeholder 
-                    "  select.dispatchEvent(new Event('change', { bubbles: true }));" +
-                    "}"
-            );
+                            "if (select) {" +
+                            "  select.value = '';" +
+                            "  select.selectedIndex = 0;" + // Often 0 is the default placeholder
+                            "  select.dispatchEvent(new Event('change', { bubbles: true }));" +
+                            "}");
         }
         pause(1200);
     }
@@ -259,9 +247,8 @@ public class AddBookingTest extends BaseTest {
     private void ensureServiceOptionsLoaded() {
         Boolean serviceLoaded = wait.until(driver -> (Boolean) ((JavascriptExecutor) driver).executeScript(
                 "const select = document.getElementById('bk-service');" +
-                        "return !!select && Array.from(select.options).some(option => option.value);"
-        ));
-        Assertions.assertTrue(Boolean.TRUE.equals(serviceLoaded), "Booking service options were not loaded");
+                        "return !!select && Array.from(select.options).some(option => option.value);"));
+        Assert.assertTrue(Boolean.TRUE.equals(serviceLoaded), "Booking service options were not loaded");
     }
 
     private void selectServiceByName(String serviceName) {
@@ -272,7 +259,8 @@ public class AddBookingTest extends BaseTest {
                         ".trim();" +
                         "const select = document.getElementById('bk-service');" +
                         "const options = Array.from(select.options);" +
-                        "const target = options.find(option => normalize(option.textContent) === normalize(arguments[0]));" +
+                        "const target = options.find(option => normalize(option.textContent) === normalize(arguments[0]));"
+                        +
                         "if (!target) { return false; }" +
                         "target.selected = true;" +
                         "select.selectedIndex = options.indexOf(target);" +
@@ -280,11 +268,9 @@ public class AddBookingTest extends BaseTest {
                         "select.dispatchEvent(new Event('input', { bubbles: true }));" +
                         "select.dispatchEvent(new Event('change', { bubbles: true }));" +
                         "return select.value === target.value && target.selected;",
-                serviceName
-        );
-        Assertions.assertTrue(Boolean.TRUE.equals(selected), "Could not select service: " + serviceName);
+                serviceName);
+        Assert.assertTrue(Boolean.TRUE.equals(selected), "Could not select service: " + serviceName);
     }
-
 
     private String waitForMessage(String expectedNormalizedText) {
         return wait.until(driver -> {
@@ -297,8 +283,7 @@ public class AddBookingTest extends BaseTest {
     private void forceBookingPageVisible() {
         ((JavascriptExecutor) driver).executeScript(
                 "document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));" +
-                        "document.getElementById('booking-page').classList.add('active-page');"
-        );
+                        "document.getElementById('booking-page').classList.add('active-page');");
     }
 
     private String buildUniqueBookingTime() {

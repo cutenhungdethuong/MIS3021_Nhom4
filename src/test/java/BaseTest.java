@@ -2,7 +2,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.*;
-import org.junit.jupiter.api.*;
+import org.testng.annotations.*;
+import org.testng.Assert;
 import java.time.Duration;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    @BeforeEach
+    @BeforeMethod
     public void setup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -143,7 +144,7 @@ public class BaseTest {
         return false;
     }
 
-    @AfterEach
+    @AfterMethod
     public void tearDown() {
         if (driver != null) {
             pause(FINAL_DELAY_MS);
